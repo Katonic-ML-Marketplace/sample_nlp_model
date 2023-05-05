@@ -7,7 +7,7 @@ import json
 import os
 
 def loadmodel(logger):
-    """Get model from cloud object storage."""
+    """Get the model"""
     model_name = f"human-centered-summarization/financial-summarization-pegasus"
     logger.info(f"model file path {model_name}")
     model = PegasusForConditionalGeneration.from_pretrained(model_name)
@@ -41,5 +41,4 @@ def predict(features,model,logger):
     logger.info("prediction decoding")
     tokenizer = PegasusTokenizer.from_pretrained(model_name)
     predicted_result = tokenizer.decode(output[0], skip_special_tokens=True)
-#     pred_results = json.dumps(predicted_result)
     return predicted_result
