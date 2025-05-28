@@ -5,3 +5,4 @@ sentencepiece
 mlflow
 boto3
 bson
+pypdf2==3.0.1
