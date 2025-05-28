@@ -53,6 +53,12 @@ def split_pdf_base64_to_pagewise(base64_pdf: str):
         page_base64_list.append({"page_number": i + 1, "base64": page_base64})
     return page_base64_list
 
+def preprocessing():
+    return None
+
+def loadmodel():
+    return None
+
 
 def predict(payload: PredictSchema):
     base64_splits = split_pdf_base64_to_pagewise(payload["data"])
