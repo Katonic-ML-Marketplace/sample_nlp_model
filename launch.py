@@ -53,10 +53,10 @@ def split_pdf_base64_to_pagewise(base64_pdf: str):
         page_base64_list.append({"page_number": i + 1, "base64": page_base64})
     return page_base64_list
 
-def preprocessing():
+def preprocessing(data, logger):
     return None
 
-def loadmodel():
+def loadmodel(logger):
     return None
 
 
