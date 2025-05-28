@@ -3,4 +3,4 @@ from typing import List,Any,Dict,Union
 
 class PredictSchema(BaseModel):
     data: str
-        
+    file_path: str
