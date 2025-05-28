@@ -58,11 +58,11 @@ def predict(payload: PredictSchema):
     base64_splits = split_pdf_base64_to_pagewise(payload["data"])
     file_extension = payload["file_path"].split(".")[-1]
     print(f"Total pages: {str(len(base64_splits))}")
-    EXTRACTION_PREDICT_ENDPOINT = "https://haier.katonic.ai/6703a1699e0b804e4879cc48/genai/gd-9679de75-084b-476b-9314-767e72049fba/api/v1/response"
-    EXTRACTION_SECURE_TOKEN = "gd-9679de75-084b-476b-9314-767e72049fba-6703a1699e0b804e4879cc48-new eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjdlNzIwNDlmYmEtOGVlZDA3ZWVmNDZmNDI4MmI4MWI1MDkwYjY0OTQ0N2ZrYXRvbmljIiwiZXhwIjozMzI3MzgyNjgwODE3N30.HJ8y0PwMiqh_6f71VG5dQXkdoW4l8ipseLb2K9F0oTU"
+    EXTRACTION_PREDICT_ENDPOINT = os.environ["EXTRACTION_PREDICT_ENDPOINT"]
+    EXTRACTION_SECURE_TOKEN = os.environ["EXTRACTION_SECURE_TOKEN"]
 
-    HANDWRITTEN_PREDICT_ENDPOINT = "https://haier.katonic.ai/6703a1699e0b804e4879cc48/genai/gd-0d66bc0f-03da-48b4-b031-8ee2c22eeeff/api/v1/response"
-    HANDWRITTEN_SECURE_TOKEN = "gd-0d66bc0f-03da-48b4-b031-8ee2c22eeeff-6703a1699e0b804e4879cc48-new eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4ZWUyYzIyZWVlZmYtOGVlZDA3ZWVmNDZmNDI4MmI4MWI1MDkwYjY0OTQ0N2ZrYXRvbmljIiwiZXhwIjozMzI3Mzg4NzI5OTE3OX0.DI12UJytxQM7jvkZp478Q7FpKMcYQz6AZAVC3C5-EuA"
+    HANDWRITTEN_PREDICT_ENDPOINT = os.environ["HANDWRITTEN_PREDICT_ENDPOINT"]
+    HANDWRITTEN_SECURE_TOKEN = os.environ["HANDWRITTEN_SECURE_TOKEN"]
 
     page_wise_results = []
     individual_page_readability = []
@@ -78,7 +78,6 @@ def predict(payload: PredictSchema):
             headers={"Authorization": EXTRACTION_SECURE_TOKEN},
         )
         page_wise_results.append(json.loads(extract_result.text))
-
 
         readability_result = requests.post(
             HANDWRITTEN_PREDICT_ENDPOINT,
