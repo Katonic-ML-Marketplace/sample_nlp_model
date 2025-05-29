@@ -54,10 +54,10 @@ def split_pdf_base64_to_pagewise(base64_pdf: str):
     return page_base64_list
 
 def preprocessing(data, logger):
-    return None
+    return False
 
 def loadmodel(logger):
-    return None
+    return False
 
 
 def predict(data: PredictSchema, model, logger):
