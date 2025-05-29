@@ -60,9 +60,9 @@ def loadmodel(logger):
     return None
 
 
-def predict(payload: PredictSchema, model, data):
-    base64_splits = split_pdf_base64_to_pagewise(payload["data"])
-    file_extension = payload["file_path"].split(".")[-1]
+def predict(data: PredictSchema, model, logger):
+    base64_splits = split_pdf_base64_to_pagewise(data["data"])
+    file_extension = data["file_path"].split(".")[-1]
     print(f"Total pages: {str(len(base64_splits))}")
     EXTRACTION_PREDICT_ENDPOINT = os.environ["EXTRACTION_PREDICT_ENDPOINT"]
     EXTRACTION_SECURE_TOKEN = os.environ["EXTRACTION_SECURE_TOKEN"]
