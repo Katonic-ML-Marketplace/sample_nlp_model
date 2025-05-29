@@ -68,10 +68,15 @@ def predict(data, model, logger):
     logger.info(f"**TYPE***{str(type(data))}*****")
     # data = data["data"]
     logger.info(f"data_type: {type(data['data'])}")
+    logger.info(f"**********")
     logger.info(f"file_path_type: {type(data['file_path'])}")
+    logger.info(f"**********")
     logger.info(f"data: {data['data']}")
+    logger.info(f"**********")
     logger.info(f"file_path: {data['file_path']}")
+    logger.info(f"**********")
     base64_splits = split_pdf_base64_to_pagewise(data["data"])
+    logger.info(f"**********")
     file_extension = data["file_path"].split(".")[-1]
     print(f"Total pages: {str(len(base64_splits))}")
     EXTRACTION_PREDICT_ENDPOINT = os.environ["EXTRACTION_PREDICT_ENDPOINT"]
