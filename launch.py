@@ -61,7 +61,7 @@ def loadmodel(logger):
 
 
 def predict(data, model, logger):
-    logger.info(f"*****{data}*****")
+    # logger.info(f"*****{data}*****")
     json_data = json.loads(data)
     logger.info(f"data_type: {type(json_data['data'])}")
     logger.info(f"file_path_type: {type(json_data['file_path'])}")
@@ -69,7 +69,7 @@ def predict(data, model, logger):
     logger.info(f"file_path: {json_data['file_path']}")
     base64_splits = split_pdf_base64_to_pagewise(json_data["data"])
     file_extension = json_data["file_path"].split(".")[-1]
-    print(f"Total pages: {str(len(base64_splits))}")
+    logger.info(f"Total pages: {str(len(base64_splits))}")
     EXTRACTION_PREDICT_ENDPOINT = os.environ["EXTRACTION_PREDICT_ENDPOINT"]
     EXTRACTION_SECURE_TOKEN = os.environ["EXTRACTION_SECURE_TOKEN"]
 
