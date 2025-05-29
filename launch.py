@@ -61,6 +61,8 @@ def loadmodel(logger):
 
 
 def predict(data, model, logger):
+    data = json.loads(json.dumps(data))
+    data = data["data"]
     logger.info(f"data_type: {type(data['data'])}")
     logger.info(f"file_path_type: {type(data['file_path'])}")
     logger.info(f"data: {data['data']}")
