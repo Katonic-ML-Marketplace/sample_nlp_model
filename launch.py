@@ -61,8 +61,8 @@ def loadmodel(logger):
 
 
 def predict(data: PredictSchema, model, logger):
-    logger.info(f"data: {data["data"]}")
-    logger.info(f"file_path: {data["file_path"]}")
+    logger.info(f"data: {data['data']}")
+    logger.info(f"file_path: {data['file_path']}")
     base64_splits = split_pdf_base64_to_pagewise(data["data"])
     file_extension = data["file_path"].split(".")[-1]
     print(f"Total pages: {str(len(base64_splits))}")
