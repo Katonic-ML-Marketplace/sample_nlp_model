@@ -62,22 +62,13 @@ def loadmodel(logger):
 
 def predict(data, model, logger):
     logger.info(f"*****{data}*****")
-    logger.info(f"**TYPE***{str(type(data))}*****")
-
-    data = json.loads(json.dumps(data))
-    logger.info(f"**TYPE***{str(type(data))}*****")
-    # data = data["data"]
-    logger.info(f"data_type: {type(data['data'])}")
-    logger.info(f"**********")
-    logger.info(f"file_path_type: {type(data['file_path'])}")
-    logger.info(f"**********")
-    logger.info(f"data: {data['data']}")
-    logger.info(f"**********")
-    logger.info(f"file_path: {data['file_path']}")
-    logger.info(f"**********")
-    base64_splits = split_pdf_base64_to_pagewise(data["data"])
-    logger.info(f"**********")
-    file_extension = data["file_path"].split(".")[-1]
+    json_data = json.loads(data)
+    logger.info(f"data_type: {type(json_data['data'])}")
+    logger.info(f"file_path_type: {type(json_data['file_path'])}")
+    logger.info(f"data: {json_data['data']}")
+    logger.info(f"file_path: {json_data['file_path']}")
+    base64_splits = split_pdf_base64_to_pagewise(json_data["data"])
+    file_extension = json_data["file_path"].split(".")[-1]
     print(f"Total pages: {str(len(base64_splits))}")
     EXTRACTION_PREDICT_ENDPOINT = os.environ["EXTRACTION_PREDICT_ENDPOINT"]
     EXTRACTION_SECURE_TOKEN = os.environ["EXTRACTION_SECURE_TOKEN"]
@@ -88,21 +79,21 @@ def predict(data, model, logger):
     page_wise_results = []
     individual_page_readability = []
     for idx in range(len(base64_splits)):
-        print(f"Page No. {idx+1}")
-        data = {
+        logger.info(f"Page No. {idx+1}")
+        request_data = {
             "data": base64_splits[idx]["base64"],
             "file_path": f"{str(ObjectId())}.{file_extension}",
         }
         extract_result = requests.post(
             EXTRACTION_PREDICT_ENDPOINT,
-            json=data,
+            json=request_data,
             headers={"Authorization": EXTRACTION_SECURE_TOKEN},
         )
         page_wise_results.append(json.loads(extract_result.text))
 
         readability_result = requests.post(
             HANDWRITTEN_PREDICT_ENDPOINT,
-            json=data,
+            json=request_data,
             headers={"Authorization": HANDWRITTEN_SECURE_TOKEN},
         )
         json_result = json.loads(readability_result.text)
