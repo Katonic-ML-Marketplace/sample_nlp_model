@@ -60,7 +60,9 @@ def loadmodel(logger):
     return False
 
 
-def predict(data: PredictSchema, model, logger):
+def predict(data, model, logger):
+    logger.info(f"data_type: {type(data['data'])}")
+    logger.info(f"file_path_type: {type(data['file_path'])}")
     logger.info(f"data: {data['data']}")
     logger.info(f"file_path: {data['file_path']}")
     base64_splits = split_pdf_base64_to_pagewise(data["data"])
