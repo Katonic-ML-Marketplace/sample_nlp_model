@@ -1,6 +1,7 @@
 pandas==1.3.5
 transformers==4.25.1
 torch==1.13.1
+numpy==1.2.2
 sentencepiece
 mlflow
 boto3
